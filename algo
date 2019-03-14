@@ -1,0 +1,48 @@
+def sortAlgo(list1, list2):
+  f=len(list1)
+  i=j=0
+  flag = False
+  len_list2 = len(list2)
+  while(j<len_list2 and i<f):
+    if list1[i]==list2[j]:
+      if(flag == True):
+        flag = False
+      i+=1
+      j+=1
+    
+    else:
+      len_local=0
+      k=j
+      while (k<len_list2 and  list1[i]!=list2[k]):
+        k+=1
+        len_local+=1
+      if(k == len_list2):
+        i+=1
+        flag = True
+        continue
+      if(flag == True and j!=k):
+        flag = False
+        j = k+1
+        i+=1
+        continue
+      j=k
+      k-=1
+      len_temp= len_local
+      while len_temp!=0:
+        list1.insert(i, list2[k])
+        k-=1
+        f+=1
+        len_temp-=1
+      i=len_local+i+1
+      j+=1
+  while(j<len_list2):
+    list1.insert(i, list2[j])
+    i+=1
+    j+=1
+
+list1=["str1", "str2", "str3", "str5", "str7", "str9"]
+list2=["str1", "str2", "str6", "str7", "str8", "str9", "str10"]
+
+sortAlgo(list1, list2)
+for x in range(len(list1)): 
+   print(list1[x])
