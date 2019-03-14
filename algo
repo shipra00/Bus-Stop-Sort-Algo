@@ -1,48 +1,63 @@
+"""
+Just a template of the algorithm that could be used, I figured since your project was data mining, python would be used.
+This is non-optimised as I don't have access to the data set.
+Use as required:)
+"""
+
+
 def sortAlgo(list1, list2):
-  f=len(list1)
-  i=j=0
-  flag = False
-  len_list2 = len(list2)
+  f=len(list1)  #saves length of list1 (edited list), changes when elements are added to list1
+  i=j=0         #i to navigate through list1, j to naviagate through list2
+  flag = False  #flag takes care of ambiguous case (refer to comment at the end)
+  len_list2 = len(list2)  #length of list 2 remains constant, items are pushed into list1
   while(j<len_list2 and i<f):
-    if list1[i]==list2[j]:
-      if(flag == True):
+    if list1[i]==list2[j]:  #basic case
+      if(flag == True):     #flag takes care of ambiguous case (refer to comment at the end)
         flag = False
       i+=1
       j+=1
     
     else:
-      len_local=0
-      k=j
+      len_local=0   #saves the number of elements to be popped into list1
+      k=j           #saves the index of elements to be popped into list1
       while (k<len_list2 and  list1[i]!=list2[k]):
         k+=1
         len_local+=1
-      if(k == len_list2):
+      if(k == len_list2):   #case where the element isn't found in list2
         i+=1
         flag = True
         continue
-      if(flag == True and j!=k):
+      if(flag == True and j!=k):    #flag takes care of ambiguous case (refer to comment at the end)
         flag = False
-        j = k+1
+        j = k+1       #save the index of the last element checked in list2 
         i+=1
         continue
-      j=k
+      j=k        
       k-=1
       len_temp= len_local
       while len_temp!=0:
-        list1.insert(i, list2[k])
+        list1.insert(i, list2[k])   #pop elements to list1
         k-=1
         f+=1
         len_temp-=1
-      i=len_local+i+1
-      j+=1
-  while(j<len_list2):
+      i=len_local+i+1     #new index for list 1 because of the new elements
+      j+=1                #new index for list2 (skips over the previously checked elements)
+  while(j<len_list2):     #pop the remaining elements to list1
     list1.insert(i, list2[j])
     i+=1
     j+=1
 
 list1=["str1", "str2", "str3", "str5", "str7", "str9"]
-list2=["str1", "str2", "str6", "str7", "str8", "str9", "str10"]
+list2=["str1", "str2", "str4", "str7", "str8", "str9", "str10"]
 
 sortAlgo(list1, list2)
 for x in range(len(list1)): 
    print(list1[x])
+   
+"""
+in the example provided above we hit an ambiguous case (in case of bus stops), we do not know if str6 is to be placed between 
+str2 and str3, str 3 and str5, str5 and str7 because of the limited information provided. In this case we just skip over the 
+ambiguous value and try dealing with it after sufficient data in collected through comparison.
+
+Expected result: list1=[""str1", "str2", "str3", "str5", "str7", "str8", "str9", "str10"]
+"""
