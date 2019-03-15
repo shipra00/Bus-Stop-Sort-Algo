@@ -45,6 +45,7 @@ def sortAlgo(list1, list2):
   while(j<len_list2):     #pop the remaining elements to list1
     list1.insert(i, list2[j])
     i+=1
+    f+=1
     j+=1
 
 list1=["str1", "str2", "str3", "str5", "str7", "str9"]
