@@ -56,7 +56,7 @@ for x in range(len(list1)):
    print(list1[x])
    
 """
-in the example provided above we hit an ambiguous case (in case of bus stops), we do not know if str6 is to be placed between 
+in the example provided above we hit an ambiguous case (in case of bus stops), we do not know if str4 is to be placed between 
 str2 and str3, str 3 and str5, str5 and str7 because of the limited information provided. In this case we just skip over the 
 ambiguous value and try dealing with it after sufficient data in collected through comparison.
 
